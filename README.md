@@ -1,0 +1,1 @@
+A collection of C#/.NET studies and practical projects covering programming fundamentals, object-oriented programming, LINQ, multithreading, data structures, database operations, Entity Framework, and ASP.NET Web Forms. Includes hands-on examples, CRUD implementations, and software development concepts.

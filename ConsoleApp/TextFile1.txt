@@ -1,0 +1,18 @@
+﻿COMO INSTALAR MSTest
+
+ChatGPT said:
+Como você está usando Visual Studio 2013 + .NET Framework 4.8, o caminho depende de qual versão do MSTest você quer usar. 
+Para o seu projeto antigo, eu recomendo MSTest V1, que é o mais compatível.
+
+1. Pelo NuGet
+No Visual Studio, abra:
+
+Tools → NuGet Package Manager → Package Manager Console
+
+E execute:
+
+Install-Package MSTest.TestFramework -Version 1.2.0
+
+Depois instale o adaptador:
+
+Install-Package MSTest.TestAdapter -Version 1.2.0

@@ -1,0 +1,16 @@
+﻿Sim, está absolutamente correto!Esse comportamento é o padrão do Entity Framework 
+(EF6 e EF Core) para mapeamento de herança e se chama TPH (Table-per-Hierarchy) ou Tabela por 
+Hierarquia.Como o EF organiza essa tabela única?O Entity Framework cria uma única tabela (geralmente chamada People) 
+contendo:Campos comuns: As colunas da classe mãe (Id, Name, Status).Campos específicos: As colunas das classes filhas 
+(CPF e CNPJ).Coluna Discriminator: Uma coluna de texto que o próprio EF gerencia automaticamente. 
+Ela armazena o valor "NaturalPerson" ou "LegalPerson" para saber qual classe deve instanciar quando você fizer 
+uma busca no C#.💡 Por que o EF faz isso por padrão?Performance: É a estratégia de herança mais rápida para o 
+banco de dados. Como tudo está na mesma tabela, o EF não precisa fazer comandos JOIN complexos para buscar os 
+dados de uma pessoa.Simplicidade: Fica muito fácil gerenciar os índices e as buscas.⚠️ Um detalhe importante 
+para o seu código:Como o SQL Server vai salvar tanto Pessoas Físicas quanto Jurídicas na mesma tabela, quando 
+você cadastrar uma Pessoa Física (NaturalPerson), o campo CNPJ ficará vazio (NULL) no banco de dados.Por causa 
+disso, o EF configura os campos específicos (CPF e CNPJ) como opcionais (Nullable) no banco de dados do SQL Server, 
+mesmo que você tenha colocado o atributo [Required] no C#. O [Required] continuará funcionando perfeitamente quando
+você tentar salvar o objeto pelo seu código .NET, garantindo que o usuário digite o campo.Está tudo pronto e 
+configurado corretamente! Quer ajuda para criar um código de teste que salva e busca essas pessoas do banco 
+de dados para ver como funciona na prática?

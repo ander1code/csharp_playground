@@ -1,0 +1,166 @@
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        class Person
+        {
+            public Person(int id, string name, DateTime birthday)
+            {
+                this.id = id;
+                this.name = name;
+                this.birthday = birthday;
+            }
+
+            private int id;
+
+            public int Id
+            {
+                get { return id; }
+                set { id = value; }
+            }
+            
+            private string name;
+
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+
+            private DateTime birthday;
+
+            public DateTime Birthday
+            {
+                get { return birthday; }
+                set { birthday = value; }
+            }
+        }
+
+        class JsonFactory
+        {
+            private static JsonFactory instance = null;
+
+            public static JsonFactory Instance
+            {
+                get { if (JsonFactory.instance == null) { JsonFactory.instance = new JsonFactory(); } return JsonFactory.instance; }
+            }
+
+            private JsonFactory()
+            {
+            }
+
+            public JArray Open()
+            {
+                try
+                {
+                    if (File.Exists("people.json"))
+                    {
+                        string json = File.ReadAllText("people.json");
+                        JObject document = JObject.Parse(json);
+                        JArray root = (JArray)document["people"];
+                        return root;
+                    }
+                    return null;
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine("Error: {0}", error);
+                    return null;
+                }
+            }
+
+            public JObject Close(JObject document)
+            {
+                return null;
+            }
+        }
+
+
+        class CrudJson
+        {
+            private static CrudJson instance = null;
+
+            public static CrudJson Instance
+            {
+                get { if (CrudJson.instance == null) { CrudJson.instance = new CrudJson(); } return CrudJson.instance; }
+            } 
+
+            private CrudJson()
+            {
+            }
+            
+            private int CreateJsonElement(string name, DateTime birthday)
+            {
+                if(File.Exists("people.json"))
+                {
+
+                }
+                
+                return 1;
+            }
+
+            private int CloseJsonElement(string name, DateTime birthday)
+            {
+                if (File.Exists("people.json"))
+                {
+
+                }
+
+                return 1;
+            }
+
+            public int InsertPerson(string name, DateTime birthday)
+            {
+                return 1;
+            }
+
+            public int UpdatePerson(string name, DateTime birthday)
+            {
+                return 1;
+            }
+
+            public int DeletePerson(string name, DateTime birthday)
+            {
+                return 1;
+            }
+
+            public Person GetPersonByID(string name, DateTime birthday)
+            {
+                JArray root = JsonFactory.Instance.Open();
+                JObject personById = null;
+                foreach (JObject person in root)
+                {
+                    if (person["id"] != null && person["id"].ToString() == "10")
+                    {
+                        personById = person;
+                        break;
+                    }
+                }
+                if(personById != null)
+                {
+                    return null;
+                }
+                return null;
+            }
+
+            public int GetPersonByName(string name, DateTime birthday)
+            {
+                return 1;
+            }
+        }
+
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("jdhsajdhsaj");
+            Console.ReadKey();
+        }
+    }
+}
